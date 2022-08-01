@@ -271,12 +271,13 @@ public class ArbolDecision {
         float imMayorTemp = Entropia( p1MayorTemp, p2MayorTemp );
         
         System.out.println("\n6.2.1 Entropia de Temperatura");
-        imprimirEntropia( "Temperatura \n< MT", p1MenorTemp, p2MenorTemp, imMenorTemp );
-        imprimirEntropia( "\n>= MT", p1MayorTemp, p2MayorTemp, imMayorTemp );
+        imprimirEntropia( "< MT", p1MenorTemp, p2MenorTemp, imMenorTemp );
+        imprimirEntropia( ">= MT", p1MayorTemp, p2MayorTemp, imMayorTemp );
 
         System.out.println("");
         System.out.println("6.3 Instancias de Humedad");
         System.out.println("Media General "+ mediaHumedadGeneral);
+        System.out.println("\t#\tC1\tC2");
         System.out.println(" < MH\t"+menorMediaHumedad+"\t"+noJugarMenorHumedad+"\t"+jugarMenorHumedad);
         System.out.println("=> MH\t"+mayorMediaHumedad+"\t"+noJugarMayorHumedad+"\t"+jugarMayorHumedad);
         
@@ -291,11 +292,12 @@ public class ArbolDecision {
         float imMayorHumedad = Entropia( p1MayorHumedad, p2MayorHumedad );
         
         System.out.println("\n6.3.1 Entropia de Humedad");
-        imprimirEntropia( "Humedad \n< MH", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
-        imprimirEntropia( "\n>= MH", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
+        imprimirEntropia( "< MH", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
+        imprimirEntropia( ">= MH", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
         
         System.out.println("");
         System.out.println("6.4 Instancias de Viento");
+        System.out.println("\t#\tC1\tC2");
         System.out.println("Si\t"+contVientoSi+"\t"+noJugarVientoSi+"\t"+jugarVientoSi);
         System.out.println("No\t"+contVientoNo+"\t"+noJugarVientoNo+"\t"+jugarVientoNo);
         
@@ -310,8 +312,8 @@ public class ArbolDecision {
         float imMayorViento = Entropia( p1MayorViento, p2MayorViento );
         
         System.out.println("\n6.4.1 Entropia de Viento");
-        imprimirEntropia( "Viento \nSi", p1MenorViento, p2MenorViento, imMenorViento );
-        imprimirEntropia( "\nNo", p1MayorViento, p2MayorViento, imMayorViento );
+        imprimirEntropia( "Si", p1MenorViento, p2MenorViento, imMenorViento );
+        imprimirEntropia( "No", p1MayorViento, p2MayorViento, imMayorViento );
       
     }
     
