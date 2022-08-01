@@ -30,6 +30,7 @@ public class ArbolDecision {
             {"12", "nublado", "72", "90", "si", "jugar"},
             {"13", "nublado", "81", "75", "no", "jugar"},
             {"14", "lluvias", "71", "80", "si", "no jugar"}};
+        
         //--Colocacion de campos--
         for (int x = 0; x < campos.length; x++){
             System.out.print(campos[x]+"\t");
@@ -43,7 +44,7 @@ public class ArbolDecision {
             System.out.println();
         } 
         System.out.println("\n1. No. Instancias: " + registros.length);
-
+        
         String c1="no jugar";
         String c2="jugar";
 
@@ -150,7 +151,7 @@ public class ArbolDecision {
         noJugarNublado = instNublado - jugarNublado;
         noJugarLluvias = instLluvias - jugarLluvias;
         
-        System.out.println("\n6.1 Instancias de Soleado");
+        System.out.println("\n6.1 Instancias de Estado General");
         System.out.println("\t#\tC1\tC2");
         System.out.println("Soleado\t"+instSoleado+"\t"+noJugarSoleado+"\t"+jugarSoleado);
         System.out.println("Nublado\t"+instNublado+"\t"+noJugarNublado+"\t"+jugarNublado);
@@ -158,27 +159,23 @@ public class ArbolDecision {
         
         
         //---Entropias de Estado General----
-        //---SOLEADO
-        
-        
-        
+        //---SOLEADO 
         float p1Soleado = ValorP( noJugarSoleado, instSoleado );
         float p2Soleado = ValorP( jugarSoleado, instSoleado );
         float imSoleado = Entropia( p1Soleado, p2Soleado );
-        
+        //---NUBLADO
         float p1Nublado = ValorP( noJugarNublado, instNublado );
         float p2Nublado = ValorP( jugarNublado, instNublado );
         float imNublado = Entropia( p1Nublado, p2Nublado );
-        
+        //---LLUVIOSO
         float p1Lluvias = ValorP( noJugarLluvias, instLluvias );
         float p2Lluvias = ValorP( jugarLluvias, instLluvias );
         float imLluvias = Entropia( p1Lluvias, p2Lluvias );
         
-        System.out.println("\n6.2 Calcular Entropia de Estado General");
+        System.out.println("\n6.1.1 Entropia de Estado General");
         imprimirEntropia( "Soleado", p1Soleado, p2Soleado, imSoleado );
         imprimirEntropia( "Nublado", p1Nublado, p2Nublado, imNublado );
         imprimirEntropia( "Lluvias", p1Lluvias, p2Lluvias, imLluvias );
-        imprimirEntropia( "Soleado", p1Soleado, p2Soleado, imSoleado );
         
         // Imprimir medias
         /*System.out.println(mediaTempGeneral);
@@ -213,20 +210,15 @@ public class ArbolDecision {
             if( Integer.parseInt( registros[i][2]) < mediaTempGeneral ){
                 //System.out.println("temp[" + i + "]: "+ registros[i][2]);
                 menorMediaTemp++;
-            
                 if( registros[i][5].equals( "jugar" )){
                     jugarMenorTemp++;
                 }    
             } else {
-                
                 mayorMediaTemp++;
-                
                 if( registros[i][5].equals( "jugar" )){
-                
                     jugarMayorTemp++;
                 }
             }
-            
             if( Integer.parseInt( registros[i][3]) < mediaHumedadGeneral ){
                 menorMediaHumedad++;
             
@@ -239,22 +231,17 @@ public class ArbolDecision {
                     jugarMayorHumedad++;
                 }
             }
-            
             if( registros[i][4].equals( "si" )){
-                contVientoSi++;
-                
+                contVientoSi++;   
                 if( registros[i][5].equals("jugar")) {
                     jugarVientoSi++;
                 }
             } else {
-                
                 contVientoNo++;
-                
                 if( registros[i][5].equals("jugar")) {
                     jugarVientoNo++;
                 }
             }
-            
             
         } // Fin del for 
         noJugarMenorTemp = menorMediaTemp - jugarMenorTemp;
@@ -267,51 +254,87 @@ public class ArbolDecision {
         noJugarVientoNo = contVientoNo - jugarVientoNo;
       
         System.out.println("");
-        System.out.println("\tTemperatura");
+        System.out.println("6.2 Instancias de Temperatura");
         System.out.println("Media General "+ mediaTempGeneral);
-        System.out.println("Menor Media: " + menorMediaTemp + " C1 = " + noJugarMenorTemp + " C2 = " + jugarMenorTemp);
-        System.out.println("Mayor Media: " + mayorMediaTemp + " C1 = " + noJugarMayorTemp + " C2 = " + jugarMayorTemp);
+        System.out.println("\t#\tC1\tC2");
+        System.out.println("<  MT\t"+menorMediaTemp+"\t"+noJugarMenorTemp+"\t"+jugarMenorTemp);
+        System.out.println(">= MT\t"+mayorMediaTemp+"\t"+noJugarMayorTemp+"\t"+jugarMayorTemp);
         
+        //---Entropias de Temperatura----
+        //--Menor a la media
+        float p1MenorTemp = ValorP( noJugarMenorTemp, menorMediaTemp );
+        float p2MenorTemp = ValorP( jugarMenorTemp, menorMediaTemp );
+        float imMenorTemp = Entropia( p1MenorTemp, p2MenorTemp );
+        //--Mayor a la media
+        float p1MayorTemp = ValorP( noJugarMayorTemp, mayorMediaTemp );
+        float p2MayorTemp = ValorP( jugarMayorTemp, mayorMediaTemp );
+        float imMayorTemp = Entropia( p1MayorTemp, p2MayorTemp );
+        
+        System.out.println("\n6.2.1 Entropia de Temperatura");
+        imprimirEntropia( "Temperatura \n< MT", p1MenorTemp, p2MenorTemp, imMenorTemp );
+        imprimirEntropia( "\n>= MT", p1MayorTemp, p2MayorTemp, imMayorTemp );
+
         System.out.println("");
-        System.out.println("\tHumedad");
+        System.out.println("6.3 Instancias de Humedad");
         System.out.println("Media General "+ mediaHumedadGeneral);
-        System.out.println("Menor Media: " + menorMediaHumedad + " C1 = " + noJugarMenorHumedad + " C2 = " + jugarMenorHumedad);
-        System.out.println("Mayor Media: " + mayorMediaHumedad + " C1 = " + noJugarMayorHumedad + " C2 = " + jugarMayorHumedad);
+        System.out.println(" < MH\t"+menorMediaHumedad+"\t"+noJugarMenorHumedad+"\t"+jugarMenorHumedad);
+        System.out.println("=> MH\t"+mayorMediaHumedad+"\t"+noJugarMayorHumedad+"\t"+jugarMayorHumedad);
+        
+        //---Entropias de Humedad----
+        //--Menor a la media
+        float p1MenorHumedad = ValorP( noJugarMenorHumedad, menorMediaHumedad );
+        float p2MenorHumedad = ValorP( jugarMenorHumedad, menorMediaHumedad );
+        float imMenorHumedad = Entropia( p1MenorHumedad, p2MenorHumedad );
+        //--Mayor a la media
+        float p1MayorHumedad = ValorP( noJugarMayorHumedad, mayorMediaHumedad );
+        float p2MayorHumedad = ValorP( jugarMayorHumedad, mayorMediaHumedad );
+        float imMayorHumedad = Entropia( p1MayorHumedad, p2MayorHumedad );
+        
+        System.out.println("\n6.3.1 Entropia de Humedad");
+        imprimirEntropia( "Humedad \n< MH", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
+        imprimirEntropia( "\n>= MH", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
         
         System.out.println("");
-        System.out.println("\tViento");
-        System.out.println("Si: " + contVientoSi + " C1 = " + noJugarVientoSi + " C2 = " + jugarVientoSi );
-        System.out.println("No: " + contVientoNo + " C1 = " + noJugarVientoNo + " C2 = " + jugarVientoNo );
+        System.out.println("6.4 Instancias de Viento");
+        System.out.println("Si\t"+contVientoSi+"\t"+noJugarVientoSi+"\t"+jugarVientoSi);
+        System.out.println("No\t"+contVientoNo+"\t"+noJugarVientoNo+"\t"+jugarVientoNo);
         
-        // Entropia de 
+        //---Entropias de Viento----
+        //--Menor a la media
+        float p1MenorViento = ValorP( noJugarVientoSi, contVientoSi );
+        float p2MenorViento = ValorP( jugarVientoSi, contVientoSi );
+        float imMenorViento = Entropia( p1MenorViento, p2MenorViento );
+        //--Mayor a la media
+        float p1MayorViento = ValorP( noJugarVientoNo, contVientoNo );
+        float p2MayorViento = ValorP( jugarVientoNo, contVientoNo );
+        float imMayorViento = Entropia( p1MayorViento, p2MayorViento );
         
-        
-        // Entropia de Temperatura
-        
-        
+        System.out.println("\n6.4.1 Entropia de Viento");
+        imprimirEntropia( "Viento \nSi", p1MenorViento, p2MenorViento, imMenorViento );
+        imprimirEntropia( "\nNo", p1MayorViento, p2MayorViento, imMayorViento );
+      
     }
     
-    public static void imprimirEntropia( String nombre, float p1, float p2, float e ) {
-        
+    public static void imprimirEntropia( String nombre, float p1, float p2, float e ){
         System.out.println(nombre);
         System.out.println("\tP1: "+p1);
         System.out.println("\tP2: "+p2);
-        System.out.println("\tEntropia: "+e);
-    }
-    //--Metodo para determinar el valor de P--
-    public static float ValorP( int n, int nm ){       
-        return (float)n/(float)nm;
-        
+        System.out.println("\tIm: "+e);
     }
     
+    //--Metodo para determinar el valor de P--
+    public static float ValorP( int n, int nm ){       
+        return (float)n/(float)nm;    
+    }
+    
+    //--Metodo para determinar el valor de la etropia--
     public static float Entropia(float P1, float P2){
-        //double Im = - ((P1*(Math.log(P1)/Math.log(2))) + (P2*(Math.log(P2)/Math.log(2))));
-        
         float e = (float)-((P1*(Math.log(P1)/Math.log(2))) + (P2*(Math.log(P2)/Math.log(2))));
-        
         if (Double.isNaN(e))
             e = 0;
         return e;
     }
+    
+   
 }
    
