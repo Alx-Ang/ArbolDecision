@@ -171,18 +171,17 @@ public class ArbolDecision {
         float p1Lluvias = ValorP( noJugarLluvias, instLluvias );
         float p2Lluvias = ValorP( jugarLluvias, instLluvias );
         float imLluvias = Entropia( p1Lluvias, p2Lluvias );
+        //--Impuresa de la Division
+        float imDivisionGeneral = ImpuresaDivisionGeneral(instSoleado, instNublado, instLluvias, imSoleado, imNublado, imLluvias);
         
         System.out.println("\n6.1.1 Entropia de Estado General");
         imprimirEntropia( "Soleado", p1Soleado, p2Soleado, imSoleado );
         imprimirEntropia( "Nublado", p1Nublado, p2Nublado, imNublado );
         imprimirEntropia( "Lluvias", p1Lluvias, p2Lluvias, imLluvias );
         
-        // Imprimir medias
-        /*System.out.println(mediaTempGeneral);
-        System.out.println(mediaTempSoleado);
-        System.out.println(mediaTempNublado);
-        System.out.println(mediaTempLluvias); */
-        
+        System.out.println("\n6.2.2 Impuresa de Division");
+        imprimirImpuresaDivision( imDivisionGeneral );
+
         // Entropia de Temperatura
         int mayorMediaTemp = 0;
         int menorMediaTemp = 0;
@@ -269,10 +268,15 @@ public class ArbolDecision {
         float p1MayorTemp = ValorP( noJugarMayorTemp, mayorMediaTemp );
         float p2MayorTemp = ValorP( jugarMayorTemp, mayorMediaTemp );
         float imMayorTemp = Entropia( p1MayorTemp, p2MayorTemp );
+        //--Impuresa de la Division
+        float imDivisionTemp = ImpuresaDivision(menorMediaTemp, mayorMediaTemp, imMenorTemp, imMayorTemp);
         
         System.out.println("\n6.2.1 Entropia de Temperatura");
         imprimirEntropia( "< MT", p1MenorTemp, p2MenorTemp, imMenorTemp );
         imprimirEntropia( ">= MT", p1MayorTemp, p2MayorTemp, imMayorTemp );
+        
+        System.out.println("\n6.2.2 Impuresa de Division");
+        imprimirImpuresaDivision( imDivisionTemp );
 
         System.out.println("");
         System.out.println("6.3 Instancias de Humedad");
@@ -290,10 +294,15 @@ public class ArbolDecision {
         float p1MayorHumedad = ValorP( noJugarMayorHumedad, mayorMediaHumedad );
         float p2MayorHumedad = ValorP( jugarMayorHumedad, mayorMediaHumedad );
         float imMayorHumedad = Entropia( p1MayorHumedad, p2MayorHumedad );
+         //--Impuresa de la Division
+        float imDivisionHumedad = ImpuresaDivision(menorMediaHumedad, mayorMediaHumedad, imMenorHumedad, imMayorHumedad);
         
         System.out.println("\n6.3.1 Entropia de Humedad");
         imprimirEntropia( "< MH", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
         imprimirEntropia( ">= MH", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
+        
+        System.out.println("\n6.3.2 Impuresa de Division");
+        imprimirImpuresaDivision( imDivisionHumedad );
         
         System.out.println("");
         System.out.println("6.4 Instancias de Viento");
@@ -310,18 +319,27 @@ public class ArbolDecision {
         float p1MayorViento = ValorP( noJugarVientoNo, contVientoNo );
         float p2MayorViento = ValorP( jugarVientoNo, contVientoNo );
         float imMayorViento = Entropia( p1MayorViento, p2MayorViento );
+        //--Impuresa de la Division
+        float imDivisionViento = ImpuresaDivision(contVientoSi, contVientoNo, imMenorViento, imMayorViento);
         
         System.out.println("\n6.4.1 Entropia de Viento");
-        imprimirEntropia( "Si", p1MenorViento, p2MenorViento, imMenorViento );
-        imprimirEntropia( "No", p1MayorViento, p2MayorViento, imMayorViento );
+        imprimirEntropia( "Si", p1MenorViento, p2MenorViento, imMenorViento);
+        imprimirEntropia( "No", p1MayorViento, p2MayorViento, imMayorViento);
       
+        System.out.println("\n6.4.2 Impuresa de Division");
+        imprimirImpuresaDivision( imDivisionViento );
     }
     
-    public static void imprimirEntropia( String nombre, float p1, float p2, float e ){
+    public static void imprimirImpuresaDivision( float e ){
+        System.out.println("\tIM: "+e);    
+    }
+    
+    public static void imprimirEntropia( String nombre, float p1, float p2, float e){
         System.out.println(nombre);
         System.out.println("\tP1: "+p1);
         System.out.println("\tP2: "+p2);
-        System.out.println("\tIm: "+e);
+        System.out.println("\tIM: "+e);
+        
     }
     
     //--Metodo para determinar el valor de P--
@@ -336,7 +354,19 @@ public class ArbolDecision {
             e = 0;
         return e;
     }
-    
-   
+    //--Metodo para determinar el valor de la Impuresa--
+    public static float ImpuresaDivision(float I1, float I2, float P1,float P2){
+            float e = (float)( (I1 / (I1+I2) * P1) + (I2 / (I2+I1) * P2) );
+            if (Double.isNaN(e))
+                e = 0;
+            return e;
+        }
+    //--Metodo para determinar el valor de la Impuresa--
+    public static float ImpuresaDivisionGeneral(float I1, float I2, float I3,float P1,float P2, float P3){
+            float e = (float)( (I1/(I1+I2+I3)*P1) + (I2/(I2+I1+I3)*P2) + (I3/(I3+I1+I2)*P3));
+            if (Double.isNaN(e))
+                e = 0;
+            return e;
+        }
+
 }
-   
