@@ -200,6 +200,7 @@ public class Arbol {
         int jugarVientoNo = 0;
         int noJugarVientoNo = 0;
         
+        
         for( int i = 0; i <= 13; i++ ) {
             
             if( Integer.parseInt( registros[i][2]) < mediaTempGeneral ){
@@ -318,6 +319,309 @@ public class Arbol {
         imprimirImpuresaDivision( "Humedad", imDivisionHumedad );
         imprimirImpuresaDivision( "Viento", imDivisionViento );
         
+        int contTempSoleadoNoJugarMenor = 0;
+        int contTempSoleadoJugarMenor = 0;
+        int contTempSoleadoNoJugarMayor = 0;
+        int contTempSoleadoJugarMayor = 0;
+        int instTempSoleadoMenor = 0;
+        int instTempSoleadoMayor = 0;
+        
+        int contHumedadSoleadoNoJugarMenor = 0;
+        int contHumedadSoleadoJugarMenor = 0;
+        int contHumedadSoleadoNoJugarMayor = 0;
+        int contHumedadSoleadoJugarMayor = 0;
+        int instHumedadSoleadoMenor = 0;
+        int instHumedadSoleadoMayor = 0;
+        
+        int contVientoSoleadoNoJugarSi = 0;
+        int contVientoSoleadoJugarSi = 0;
+        int contVientoSoleadoNoJugarNo = 0;
+        int contVientoSoleadoJugaNo = 0;
+        int instVientoSoleadoSi = 0;
+        int instVientoSoleadoNo = 0;
+        
+        int contTempLluviasNoJugarMenor = 0;
+        int contTempLluviasJugarMenor = 0;
+        int contTempLluviasNoJugarMayor = 0;
+        int contTempLluviasJugarMayor = 0;
+        int instTempLluviasMenor = 0;
+        int instTempLluviasMayor = 0;
+        
+        int contHumedadLluviasNoJugarMenor = 0;
+        int contHumedadLluviasJugarMenor = 0;
+        int contHumedadLluviasNoJugarMayor = 0;
+        int contHumedadLluviasJugarMayor = 0;
+        int instHumedadLluviasMenor = 0;
+        int instHumedadLluviasMayor = 0;
+        
+        
+        int contVientoLluviasNoJugarSi = 0;
+        int contVientoLluviasJugarSi = 0;
+        int contVientoLluviasNoJugarNo = 0;
+        int contVientoLluviasJugarNo = 0;
+        int instVientoLluviasSi = 0;
+        int instVientoLluviasNo = 0;
+        
+        for( int i = 0; i <= 13; i++) {
+            
+            if( registros[i][1].equals( "soleado" )) {
+                
+                /* Contar instancias menor a la media te temp soleado */
+                if( Integer.parseInt( registros[i][2]) < mediaTempSoleado )
+                    instTempSoleadoMenor++;
+                else
+                    instTempSoleadoMayor++;
+                
+                /* Contar instancias menor a la media te humedad soleado */
+                if( Integer.parseInt( registros[i][3]) < mediaHumedadSoleado )
+                    instHumedadSoleadoMenor++;
+                else
+                    instHumedadSoleadoMayor++;
+                
+                /* Contar instancias menor a la media te viento soleado */
+                if( registros[i][4].equals("si") )
+                    instVientoSoleadoSi++;
+                else
+                    instVientoSoleadoNo++;
+                
+                if( registros[i][5].equals( "no jugar" )) {
+                    
+                    
+                    if( Integer.parseInt(registros[i][2])< mediaTempSoleado) {
+                        
+                        contTempSoleadoNoJugarMenor++;
+                    } else {
+                        contTempSoleadoNoJugarMayor++;
+                    }
+                    if( Integer.parseInt(registros[i][3])< mediaHumedadSoleado) {
+                        
+                        contHumedadSoleadoNoJugarMenor++;
+                    } else {
+                        contHumedadSoleadoNoJugarMayor++;
+                    }
+                    if( registros[i][4].equals( "si" )) {
+                        
+                        contVientoSoleadoNoJugarSi++;
+                    } else {
+                        
+                        contVientoSoleadoNoJugarNo++;
+                    }
+                }
+                
+            }
+            
+            if( registros[i][1].equals( "lluvias" )) {
+                
+                /* Contar instancias menor a la media te temp soleado */
+                if( Integer.parseInt( registros[i][2]) < mediaTempLluvias)
+                    instTempLluviasMenor++;
+                else
+                    instTempLluviasMayor++;
+                
+                /* Contar instancias menor a la media te humedad soleado */
+                if( Integer.parseInt( registros[i][3]) < mediaHumedadLluvias )
+                    instHumedadLluviasMenor++;
+                else
+                    instHumedadLluviasMayor++;
+                
+                /* Contar instancias menor a la media te viento soleado */
+                if( registros[i][4].equals("si") )
+                    instVientoLluviasSi++;
+                else
+                    instVientoLluviasNo++;
+                
+                if( registros[i][5].equals( "no jugar" )) {
+                    
+                    
+                    if( Integer.parseInt(registros[i][2])< mediaTempLluvias) {
+                        
+                        contTempLluviasNoJugarMenor++;
+                    } else {
+                        contTempLluviasNoJugarMayor++;
+                    }
+                    if( Integer.parseInt(registros[i][3])< mediaHumedadLluvias) {
+                        
+                        contHumedadLluviasNoJugarMenor++;
+                    } else {
+                        contHumedadLluviasNoJugarMayor++;
+                    }
+                    if( registros[i][4].equals( "si" )) {
+                        
+                        contVientoLluviasNoJugarSi++;
+                    } else {
+                        
+                        contVientoLluviasNoJugarNo++;
+                    }
+                }
+            }
+        }
+        
+        contTempSoleadoJugarMenor = instTempSoleadoMenor - contTempSoleadoNoJugarMenor;
+        contTempSoleadoJugarMayor = instTempSoleadoMayor - contTempSoleadoNoJugarMayor;
+        
+        contHumedadSoleadoJugarMenor = instHumedadSoleadoMenor - contHumedadSoleadoNoJugarMenor;
+        contHumedadSoleadoJugarMayor = instHumedadSoleadoMayor - contHumedadSoleadoNoJugarMayor;
+        
+        contVientoSoleadoJugarSi = instVientoSoleadoSi - contVientoSoleadoNoJugarSi;
+        contVientoSoleadoJugaNo = instVientoSoleadoNo - contVientoSoleadoNoJugarNo;
+        
+        System.out.println("\nInstancias de Soleado");
+        System.out.println("\t#\tC1\tC2");
+        System.out.println("Soleado\t"+instSoleado+"\t"+noJugarSoleado+"\t"+jugarSoleado);
+        
+        System.out.println("");
+        System.out.println("7.1 Instancias de Temperatura Soleado");
+        imprimirInstanciaContinua(mediaTempSoleado, instTempSoleadoMayor, 
+                instTempSoleadoMenor, contTempSoleadoNoJugarMayor, contTempSoleadoJugarMayor, 
+                contTempSoleadoNoJugarMenor, contTempSoleadoJugarMenor);
+        
+        float p1TempSoleadoMenor = ValorP( contTempSoleadoNoJugarMenor, instTempSoleadoMenor);
+        float p2TempSoleadoMenor = ValorP( contTempSoleadoJugarMenor, instTempSoleadoMenor);
+        float imTempSoleadoMenor = Entropia(p1TempSoleadoMenor, p2TempSoleadoMenor);
+        
+        float p1TempSoleadoMayor = ValorP( contTempSoleadoNoJugarMayor, instTempSoleadoMayor);
+        float p2TempSoleadoMayor = ValorP( contTempSoleadoJugarMayor, instTempSoleadoMayor);
+        float imTempSoleadoMayor = Entropia(p1TempSoleadoMayor, p2TempSoleadoMayor);
+        
+        imprimirEntropia("< "+mediaTempSoleado, p1TempSoleadoMenor, 
+                p2TempSoleadoMenor, imTempSoleadoMenor);
+        imprimirEntropia(">= "+mediaTempSoleado, p1TempSoleadoMayor, 
+                p2TempSoleadoMayor, imTempSoleadoMayor);
+        
+        float imTempSoleadoDivision = ImpuresaDivision(instTempSoleadoMenor, instTempSoleadoMayor, 
+                imTempSoleadoMenor, imTempSoleadoMayor);
+        
+        System.out.println("\n7.2 Instancias de Humedad Soleado");
+        imprimirInstanciaContinua(mediaHumedadSoleado, instHumedadSoleadoMenor, 
+                instHumedadSoleadoMayor, contHumedadSoleadoNoJugarMenor, contHumedadSoleadoJugarMenor, 
+                contHumedadSoleadoNoJugarMayor, contHumedadSoleadoJugarMayor);
+        
+        float p1HumedadSoleadoMenor = ValorP( contHumedadSoleadoNoJugarMenor, instHumedadSoleadoMenor);
+        float p2HumedadSoleadoMenor = ValorP( contHumedadSoleadoJugarMenor, instHumedadSoleadoMenor);
+        float imHumedadSoleadoMenor = Entropia(p1HumedadSoleadoMenor, p2HumedadSoleadoMenor);
+        
+        float p1HumedadSoleadoMayor = ValorP( contHumedadSoleadoNoJugarMayor, instHumedadSoleadoMayor);
+        float p2HumedadSoleadoMayor = ValorP( contHumedadSoleadoJugarMayor, instHumedadSoleadoMayor);
+        float imHumedadSoleadoMayor = Entropia(p1HumedadSoleadoMayor, p2HumedadSoleadoMayor);
+        
+        imprimirEntropia("< "+mediaHumedadSoleado, p1HumedadSoleadoMenor, 
+                p2HumedadSoleadoMenor, imHumedadSoleadoMenor);
+        imprimirEntropia(">= "+mediaHumedadSoleado, p1HumedadSoleadoMayor, 
+                p2HumedadSoleadoMayor, imHumedadSoleadoMayor);
+        
+        float imHumedadSoleadoDivision = ImpuresaDivision(instHumedadSoleadoMenor, instHumedadSoleadoMayor, 
+                imHumedadSoleadoMenor, imHumedadSoleadoMayor);
+        
+        System.out.println("\n7.2 Instancias de Viento Soleado");
+        imprimirInstanciaViento(instVientoSoleadoSi, instVientoSoleadoNo, 
+                contVientoSoleadoNoJugarSi, contVientoSoleadoJugarSi,
+                contVientoSoleadoNoJugarNo, contVientoSoleadoJugaNo);
+        
+        float p1VientoSoleadoSi = ValorP( contVientoSoleadoNoJugarSi, instVientoSoleadoSi);
+        float p2VientoSoleadoSi = ValorP( contVientoSoleadoJugarSi, instVientoSoleadoSi);
+        float imVientoSoleadoSi = Entropia(p1VientoSoleadoSi, p2VientoSoleadoSi);
+        
+        float p1VientoSoleadoNo = ValorP( contVientoSoleadoNoJugarNo, instVientoSoleadoNo);
+        float p2VientoSoleadoNo = ValorP( contVientoSoleadoJugaNo, instVientoSoleadoNo);
+        float imVientoSoleadoNo = Entropia(p1VientoSoleadoNo, p2VientoSoleadoNo);
+        
+        imprimirEntropia("< "+contVientoSoleadoJugarSi, p1VientoSoleadoSi, 
+                p2VientoSoleadoSi, imVientoSoleadoSi);
+        imprimirEntropia(">= "+contVientoSoleadoJugaNo, p1VientoSoleadoNo, 
+                p2VientoSoleadoNo, imVientoSoleadoNo);
+        
+        float imVientoSoleadoDivision = ImpuresaDivision(instVientoSoleadoSi, instVientoSoleadoNo, 
+                imVientoSoleadoSi, imVientoSoleadoNo);
+        
+        /* Lluvias */
+        contTempLluviasJugarMenor = instTempLluviasMenor - contTempLluviasNoJugarMenor;
+        contTempLluviasJugarMayor = instTempLluviasMayor - contTempLluviasNoJugarMayor;
+        
+        contHumedadLluviasJugarMenor = instHumedadLluviasMenor - contHumedadLluviasNoJugarMenor;
+        contHumedadLluviasJugarMayor = instHumedadLluviasMayor - contHumedadLluviasNoJugarMayor;
+        
+        contVientoLluviasJugarSi = instVientoLluviasSi - contVientoLluviasNoJugarSi;
+        contVientoLluviasJugarNo = instVientoLluviasNo - contVientoLluviasNoJugarNo;
+        
+                
+        System.out.println("\nInstancias de Lluvioso");
+        System.out.println("\t#\tC1\tC2");
+        System.out.println("Soleado\t"+instLluvias+"\t"+noJugarLluvias+"\t"+jugarLluvias);
+        
+        System.out.println("");
+        System.out.println("8 Instancias de Temperatura Lluvias");
+        imprimirInstanciaContinua(mediaTempLluvias, instTempLluviasMayor, 
+                instTempLluviasMenor, contTempLluviasNoJugarMayor, contTempLluviasJugarMayor, 
+                contTempLluviasNoJugarMenor, contTempLluviasJugarMenor);
+        
+        float p1TempLluviasMenor = ValorP( contTempLluviasNoJugarMenor, instTempLluviasMenor);
+        float p2TempLluviasMenor = ValorP( contTempLluviasJugarMenor, instTempLluviasMenor);
+        float imTempLluviasMenor = Entropia(p1TempLluviasMenor, p2TempLluviasMenor);
+        
+        float p1TempLluviasMayor = ValorP( contTempLluviasNoJugarMayor, instTempLluviasMayor);
+        float p2TempLluviasMayor = ValorP( contTempLluviasJugarMayor, instTempLluviasMayor);
+        float imTempLluviasMayor = Entropia(p1TempLluviasMayor, p2TempLluviasMayor);
+        
+        imprimirEntropia("< "+mediaTempLluvias, p1TempLluviasMenor, 
+                p2TempLluviasMenor, imTempLluviasMenor);
+        imprimirEntropia(">= "+mediaTempLluvias, p1TempLluviasMayor, 
+                p2TempLluviasMayor, imTempLluviasMayor);
+        
+        float imTempLluviasDivision = ImpuresaDivision(instTempLluviasMenor, instTempLluviasMayor, 
+                imTempLluviasMenor, imTempLluviasMayor);
+        
+        System.out.println("\n8.1 Instancias de Humedad Lluvias");
+        imprimirInstanciaContinua(mediaHumedadLluvias, instHumedadLluviasMayor, 
+                instHumedadLluviasMenor, contHumedadLluviasNoJugarMayor, contHumedadLluviasJugarMayor, 
+                contHumedadLluviasNoJugarMenor, contHumedadLluviasJugarMenor);
+        
+        float p1HumedadLluviasMenor = ValorP( contHumedadLluviasNoJugarMenor, instHumedadLluviasMenor);
+        float p2HumedadLluviasMenor = ValorP( contHumedadLluviasJugarMenor, instHumedadLluviasMenor);
+        float imHumedadLluviasMenor = Entropia(p1HumedadLluviasMenor, p2HumedadLluviasMenor);
+        
+        float p1HumedadLluviasMayor = ValorP( contHumedadLluviasNoJugarMayor, instHumedadLluviasMayor);
+        float p2HumedadLluviasMayor = ValorP( contHumedadLluviasJugarMayor, instHumedadLluviasMayor);
+        float imHumedadLluviasMayor = Entropia(p1HumedadLluviasMayor, p2HumedadLluviasMayor);
+        
+        imprimirEntropia("< "+mediaHumedadLluvias, p1HumedadLluviasMenor, 
+                p2HumedadLluviasMenor, imHumedadLluviasMenor);
+        imprimirEntropia(">= "+mediaHumedadLluvias, p1HumedadLluviasMayor, 
+                p2HumedadLluviasMayor, imHumedadLluviasMayor);
+        
+        float imHumedadLluviasDivision = ImpuresaDivision(instHumedadLluviasMenor, instHumedadLluviasMayor, 
+                imHumedadLluviasMenor, imHumedadLluviasMayor);
+        
+        System.out.println("\n8.2 Instancias de Viento Lluvias");
+        imprimirInstanciaViento(instVientoLluviasSi, instVientoLluviasNo, 
+                contVientoLluviasNoJugarSi, contVientoLluviasJugarSi,
+                contVientoLluviasNoJugarNo, contVientoLluviasJugarNo);
+        
+        float p1VientoLluviasSi = ValorP( contVientoLluviasNoJugarSi, instVientoLluviasSi);
+        float p2VientoLluviasSi = ValorP( contVientoLluviasJugarSi, instVientoLluviasSi);
+        float imVientoLluviasSi = Entropia(p1VientoLluviasSi, p2VientoLluviasSi);
+        
+        float p1VientoLluviasNo = ValorP( contVientoLluviasNoJugarNo, instVientoLluviasNo);
+        float p2VientoLluviasNo = ValorP( contVientoLluviasJugarNo, instVientoLluviasNo);
+        float imVientoLluviasNo = Entropia(p1VientoLluviasNo, p2VientoLluviasNo);
+        
+        imprimirEntropia("Si", p1VientoLluviasSi, 
+                p2VientoLluviasSi, imVientoLluviasSi);
+        imprimirEntropia("No ", p1VientoLluviasNo, 
+                p2VientoLluviasNo, imVientoLluviasNo);
+        
+        float imVientoLluviasDivision = ImpuresaDivision(instVientoLluviasSi, instVientoLluviasNo, 
+                imVientoLluviasSi, imVientoLluviasNo);
+        
+        System.out.println("X.Y Imprimir Impuresa de la Division Soleado");
+        imprimirImpuresaDivision("Temperatura", imTempSoleadoDivision);
+        imprimirImpuresaDivision("Humedad", imHumedadSoleadoDivision);
+        imprimirImpuresaDivision("Viento", imVientoSoleadoDivision);
+        
+        System.out.println("X.Y Imprimir Impuresa de la Division Lluvioso");
+        imprimirImpuresaDivision("Temperatura", imTempLluviasDivision);
+        imprimirImpuresaDivision("Humedad", imHumedadLluviasDivision);
+        imprimirImpuresaDivision("Viento", imVientoLluviasDivision);
+        
         Frame frame = new Frame();
         //frame.setVisible(true);
         frame.setEstadoGeneral("Estado General");
@@ -334,12 +638,56 @@ public class Arbol {
         DefaultMutableTreeNode DMT_EntropiaNublado = new DefaultMutableTreeNode( "Entropia Nublado : "+imNublado );
         EG.add( DMT_EntropiaNublado );
         
-        DefaultMutableTreeNode testNodo = new DefaultMutableTreeNode( "test ");
-        DefaultMutableTreeNode testNodo2 = new DefaultMutableTreeNode( "test2 ");
-        DefaultMutableTreeNode testNodo3 = new DefaultMutableTreeNode( "(Juega) ");
-        DMT_EntropiaSoleado.add(testNodo);
-        DMT_EntropiaLluvioso.add(testNodo2);
-        DMT_EntropiaNublado.add(testNodo3);
+        DefaultMutableTreeNode SoleadoHumedad = 
+                new DefaultMutableTreeNode( "Entropia Humedad: "+ imHumedadSoleadoDivision);
+        
+        DMT_EntropiaSoleado.add(SoleadoHumedad);
+        
+        DefaultMutableTreeNode SoleadoHumedadMenor = 
+                new DefaultMutableTreeNode( "< "+ mediaHumedadSoleado);
+        
+        SoleadoHumedad.add(SoleadoHumedadMenor);
+        
+        DefaultMutableTreeNode SoleadoHumedadMayor = 
+                new DefaultMutableTreeNode( "> "+ mediaHumedadSoleado);
+        
+        SoleadoHumedad.add(SoleadoHumedadMayor);
+        
+        DefaultMutableTreeNode SoleadoHumedadMenorNoJugar =
+                new DefaultMutableTreeNode( "(NoJugar)");
+        
+        SoleadoHumedadMenor.add(SoleadoHumedadMenorNoJugar);
+        
+        DefaultMutableTreeNode SoleadoHumedadMayorJugar =
+                new DefaultMutableTreeNode( "(Jugar)");
+        
+        SoleadoHumedadMayor.add(SoleadoHumedadMayorJugar);
+        
+        DefaultMutableTreeNode LluviasViento =
+                new DefaultMutableTreeNode( "Viento Impuresa: "+imVientoLluviasDivision);
+        
+        DMT_EntropiaLluvioso.add(LluviasViento);
+
+        DefaultMutableTreeNode LluviasVientoSi =
+                new DefaultMutableTreeNode( "Si: "+imVientoLluviasSi);
+        
+        DefaultMutableTreeNode LluviasVientoNo =
+                new DefaultMutableTreeNode( "No: "+imVientoLluviasNo);
+        
+        LluviasViento.add(LluviasVientoSi);
+        LluviasViento.add(LluviasVientoNo);
+
+        DefaultMutableTreeNode LluviasVientoSi_NoJugar =
+                new DefaultMutableTreeNode( "(NoJugar)");
+        
+        DefaultMutableTreeNode LluviasVientoNo_Jugar =
+                new DefaultMutableTreeNode( "(Jugar)");
+        
+        LluviasVientoSi.add( LluviasVientoSi_NoJugar );
+        LluviasVientoNo.add( LluviasVientoNo_Jugar );
+        
+        DefaultMutableTreeNode NubladoJugar = new DefaultMutableTreeNode( "(Juega) ");
+        DMT_EntropiaNublado.add(NubladoJugar);
         /*DefaultMutableTreeNode color = new DefaultMutableTreeNode("color");
         DefaultMutableTreeNode font = new DefaultMutableTreeNode("font");
         EG.add(color);
