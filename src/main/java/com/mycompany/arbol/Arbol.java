@@ -174,9 +174,6 @@ public class Arbol {
         imprimirEntropia( "Soleado", p1Soleado, p2Soleado, imSoleado );
         imprimirEntropia( "Nublado", p1Nublado, p2Nublado, imNublado );
         imprimirEntropia( "Lluvias", p1Lluvias, p2Lluvias, imLluvias );
-        
-        System.out.println("\n6.2.2 Impuresa de Division");
-        imprimirImpuresaDivision( imDivisionGeneral );
 
         // Entropia de Temperatura
         int mayorMediaTemp = 0;
@@ -250,11 +247,9 @@ public class Arbol {
       
         System.out.println("");
         System.out.println("6.2 Instancias de Temperatura");
-        System.out.println("Media General "+ mediaTempGeneral);
-        System.out.println("\t#\tC1\tC2");
-        System.out.println("<  MT\t"+menorMediaTemp+"\t"+noJugarMenorTemp+"\t"+jugarMenorTemp);
-        System.out.println(">= MT\t"+mayorMediaTemp+"\t"+noJugarMayorTemp+"\t"+jugarMayorTemp);
-        
+        imprimirInstanciaContinua( mediaTempGeneral, menorMediaTemp, mayorMediaTemp,
+                noJugarMenorTemp, jugarMenorTemp, noJugarMayorTemp, jugarMayorTemp );
+       
         //---Entropias de Temperatura----
         //--Menor a la media
         float p1MenorTemp = ValorP( noJugarMenorTemp, menorMediaTemp );
@@ -268,18 +263,13 @@ public class Arbol {
         float imDivisionTemp = ImpuresaDivision(menorMediaTemp, mayorMediaTemp, imMenorTemp, imMayorTemp);
         
         System.out.println("\n6.2.1 Entropia de Temperatura");
-        imprimirEntropia( "< MT", p1MenorTemp, p2MenorTemp, imMenorTemp );
-        imprimirEntropia( ">= MT", p1MayorTemp, p2MayorTemp, imMayorTemp );
+        imprimirEntropia( "< "+mediaTempGeneral+"(MT)", p1MenorTemp, p2MenorTemp, imMenorTemp );
+        imprimirEntropia( ">= "+mediaTempGeneral+"(MT)", p1MayorTemp, p2MayorTemp, imMayorTemp );
         
-        System.out.println("\n6.2.2 Impuresa de Division");
-        imprimirImpuresaDivision( imDivisionTemp );
-
         System.out.println("");
         System.out.println("6.3 Instancias de Humedad");
-        System.out.println("Media General "+ mediaHumedadGeneral);
-        System.out.println("\t#\tC1\tC2");
-        System.out.println(" < MH\t"+menorMediaHumedad+"\t"+noJugarMenorHumedad+"\t"+jugarMenorHumedad);
-        System.out.println("=> MH\t"+mayorMediaHumedad+"\t"+noJugarMayorHumedad+"\t"+jugarMayorHumedad);
+        imprimirInstanciaContinua(mediaHumedadGeneral, menorMediaHumedad, mayorMediaHumedad, 
+                noJugarMenorHumedad, jugarMenorHumedad, noJugarMayorHumedad, jugarMayorHumedad);
         
         //---Entropias de Humedad----
         //--Menor a la media
@@ -294,18 +284,14 @@ public class Arbol {
         float imDivisionHumedad = ImpuresaDivision(menorMediaHumedad, mayorMediaHumedad, imMenorHumedad, imMayorHumedad);
         
         System.out.println("\n6.3.1 Entropia de Humedad");
-        imprimirEntropia( "< MH", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
-        imprimirEntropia( ">= MH", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
-        
-        System.out.println("\n6.3.2 Impuresa de Division");
-        imprimirImpuresaDivision( imDivisionHumedad );
+        imprimirEntropia( "< "+mediaHumedadGeneral+"(MH)", p1MenorHumedad, p2MenorHumedad, imMenorHumedad );
+        imprimirEntropia( ">= "+mediaHumedadGeneral+"(MH)", p1MayorHumedad, p2MayorHumedad, imMayorHumedad );
         
         System.out.println("");
         System.out.println("6.4 Instancias de Viento");
-        System.out.println("\t#\tC1\tC2");
-        System.out.println("Si\t"+contVientoSi+"\t"+noJugarVientoSi+"\t"+jugarVientoSi);
-        System.out.println("No\t"+contVientoNo+"\t"+noJugarVientoNo+"\t"+jugarVientoNo);
-        
+        imprimirInstanciaViento( contVientoSi, contVientoNo, noJugarVientoSi, 
+                noJugarVientoNo, jugarVientoSi, jugarVientoNo );
+
         //---Entropias de Viento----
         //--Menor a la media
         float p1MenorViento = ValorP( noJugarVientoSi, contVientoSi );
@@ -318,16 +304,41 @@ public class Arbol {
         //--Impuresa de la Division
         float imDivisionViento = ImpuresaDivision(contVientoSi, contVientoNo, imMenorViento, imMayorViento);
         
+        
         System.out.println("\n6.4.1 Entropia de Viento");
         imprimirEntropia( "Si", p1MenorViento, p2MenorViento, imMenorViento);
         imprimirEntropia( "No", p1MayorViento, p2MayorViento, imMayorViento);
       
-        System.out.println("\n6.4.2 Impuresa de Division");
-        imprimirImpuresaDivision( imDivisionViento );
+        System.out.println("\n6.5 Impuresa de Division");
+        imprimirImpuresaDivision( "Estado General", imDivisionGeneral );
+        imprimirImpuresaDivision( "Temperatura", imDivisionTemp );
+        imprimirImpuresaDivision( "Humedad", imDivisionHumedad );
+        imprimirImpuresaDivision( "Viento", imDivisionViento );
+        
+        //Frame frame = new Frame();
+        //rame.setVisible(true);
+        //frame.setEstadoGeneral("Estado General");
+        TreeDemo demo = new TreeDemo();
+        
+        demo.main(args);
+        
     }
     
-    public static void imprimirImpuresaDivision( float e ){
-        System.out.println("\tIM: "+e);    
+    public static void imprimirInstanciaContinua( float media, int n1, int n2, int n1c1, int n1c2, int n2c1, int n2c2) {
+        System.out.println("Media General "+ media);
+        System.out.println("\t\t#\tC1\tC2");
+        System.out.println("<  "+media+"(MT)\t"+n1+"\t"+n1c1+"\t"+n1c2);
+        System.out.println(">= "+media+"(MT)\t"+n2+"\t"+n2c1+"\t"+n2c2);
+    }
+            
+    public static void imprimirInstanciaViento( int n1, int n2, int n1c1, int n1c2, int n2c1, int n2c2) {
+        System.out.println("\t#\tC1\tC2");
+        System.out.println("Si\t"+n1+"\t"+n1c1+"\t"+n2c1);
+        System.out.println("No\t"+n2+"\t"+n2c1+"\t"+n2c2);
+    }
+    
+    public static void imprimirImpuresaDivision( String s, float e ){
+        System.out.println("\tIM "+s+": "+e);    
     }
     
     public static void imprimirEntropia( String nombre, float p1, float p2, float e){
