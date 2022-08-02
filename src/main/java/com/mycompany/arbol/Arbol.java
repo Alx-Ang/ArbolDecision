@@ -2,6 +2,9 @@
 package com.mycompany.arbol;
 
 import java.util.logging.*;
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 /**
  *
  * @author Master
@@ -315,12 +318,45 @@ public class Arbol {
         imprimirImpuresaDivision( "Humedad", imDivisionHumedad );
         imprimirImpuresaDivision( "Viento", imDivisionViento );
         
-        //Frame frame = new Frame();
-        //rame.setVisible(true);
-        //frame.setEstadoGeneral("Estado General");
-        TreeDemo demo = new TreeDemo();
+        Frame frame = new Frame();
+        //frame.setVisible(true);
+        frame.setEstadoGeneral("Estado General");
         
-        demo.main(args);
+        
+        /* Creación del Arbol */
+        JFrame f = new JFrame();
+        DefaultMutableTreeNode EG = new DefaultMutableTreeNode("Estado General");
+        
+        DefaultMutableTreeNode DMT_EntropiaSoleado = new DefaultMutableTreeNode( "Entropia Soleado: " +imSoleado );
+        EG.add( DMT_EntropiaSoleado );
+        DefaultMutableTreeNode DMT_EntropiaLluvioso = new DefaultMutableTreeNode( "Entropia Lluvioso: "+imLluvias );
+        EG.add( DMT_EntropiaLluvioso );
+        DefaultMutableTreeNode DMT_EntropiaNublado = new DefaultMutableTreeNode( "Entropia Nublado : "+imNublado );
+        EG.add( DMT_EntropiaNublado );
+        
+        DefaultMutableTreeNode testNodo = new DefaultMutableTreeNode( "test ");
+        DefaultMutableTreeNode testNodo2 = new DefaultMutableTreeNode( "test2 ");
+        DefaultMutableTreeNode testNodo3 = new DefaultMutableTreeNode( "test3 ");
+        DMT_EntropiaSoleado.add(testNodo);
+        DMT_EntropiaLluvioso.add(testNodo2);
+        DMT_EntropiaNublado.add(testNodo3);
+        /*DefaultMutableTreeNode color = new DefaultMutableTreeNode("color");
+        DefaultMutableTreeNode font = new DefaultMutableTreeNode("font");
+        EG.add(color);
+        EG.add(font);
+        DefaultMutableTreeNode red = new DefaultMutableTreeNode("red");
+        DefaultMutableTreeNode blue = new DefaultMutableTreeNode("blue");
+        DefaultMutableTreeNode black = new DefaultMutableTreeNode("black");
+        DefaultMutableTreeNode green = new DefaultMutableTreeNode("green");
+        red.add(blue);
+        color.add(red);
+        //color.add(blue);
+        color.add(black);
+        color.add(green);*/
+        JTree jt = new JTree(EG);
+        f.add(jt);
+        f.setSize(200, 200);
+        f.setVisible(true);
         
     }
     
