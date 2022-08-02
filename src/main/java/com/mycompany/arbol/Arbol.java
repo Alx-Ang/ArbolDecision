@@ -336,7 +336,7 @@ public class Arbol {
         
         DefaultMutableTreeNode testNodo = new DefaultMutableTreeNode( "test ");
         DefaultMutableTreeNode testNodo2 = new DefaultMutableTreeNode( "test2 ");
-        DefaultMutableTreeNode testNodo3 = new DefaultMutableTreeNode( "test3 ");
+        DefaultMutableTreeNode testNodo3 = new DefaultMutableTreeNode( "(Juega) ");
         DMT_EntropiaSoleado.add(testNodo);
         DMT_EntropiaLluvioso.add(testNodo2);
         DMT_EntropiaNublado.add(testNodo3);
@@ -357,6 +357,7 @@ public class Arbol {
         f.add(jt);
         f.setSize(200, 200);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }
     
